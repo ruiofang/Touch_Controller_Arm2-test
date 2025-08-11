@@ -1,0 +1,2 @@
+source;share/touch_controller_arm/environment/ament_prefix_path.sh
+source;share/touch_controller_arm/environment/path.sh

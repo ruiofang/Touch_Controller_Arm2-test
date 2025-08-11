@@ -48,6 +48,7 @@ extern "C" {
 # include "conio.h"
 }
 # include <string.h>
+# include <errno.h>
 # include <sys/socket.h>
 # include <arpa/inet.h>
 # include <netinet/in.h>
@@ -63,6 +64,13 @@ extern "C" {
 #include <Python.h>
 #include <cstdlib>
 
+// 添加ROS2支持的头文件
+#ifdef USE_ROS2
+#include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/string.hpp>
+#include <memory>
+#endif
+
 // 灵巧手控制类
 class DexterousHandController {
 private:
@@ -77,16 +85,35 @@ private:
     PyObject* m_handInstance;    // 灵巧手实例对象
     PyObject* m_yamlLoader;      // YAML加载器对象
     
+    // ROS2相关成员
+    bool m_useRos2;              // 是否使用ROS2
+    std::string m_ros2TopicName; // ROS2话题名称
+#ifdef USE_ROS2
+    std::shared_ptr<rclcpp::Node> m_ros2Node;        // ROS2节点
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr m_ros2Publisher;  // ROS2发布者
+#endif
+    
 public:
     DexterousHandController(const std::string& handType = "left", 
-                          const std::string& handJoint = "L10",
+                          const std::string& handJoint = "L7",
                           const std::string& canInterface = "can0",
                           const std::string& graspAction = "ZQ",
-                          const std::string& releaseAction = "张开")
+                          const std::string& releaseAction = "张开",
+                          bool useRos2 = false,
+                          const std::string& ros2TopicName = "/dexterous_hand/command")
         : m_handType(handType), m_handJoint(handJoint), m_canInterface(canInterface),
           m_graspAction(graspAction), m_releaseAction(releaseAction),
           m_handOpen(true), m_pythonInitialized(false), m_handModule(nullptr), 
-          m_handInstance(nullptr), m_yamlLoader(nullptr) {
+          m_handInstance(nullptr), m_yamlLoader(nullptr), m_useRos2(useRos2), 
+          m_ros2TopicName(ros2TopicName) {
+#ifdef USE_ROS2
+        if (m_useRos2) {
+            // 初始化ROS2
+            if (!rclcpp::ok()) {
+                rclcpp::init(0, nullptr);
+            }
+        }
+#endif
     }
     
     ~DexterousHandController() {
@@ -94,6 +121,88 @@ public:
     }
     
     bool initialize() {
+        if (m_useRos2) {
+            return initializeRos2();
+        } else {
+            return initializePython();
+        }
+    }
+    
+    void openHand() {
+        if (m_useRos2) {
+            publishRos2Command(m_releaseAction);
+        } else {
+            openHandPython();
+        }
+        m_handOpen = true;
+        std::cout << "👋 灵巧手张开 (" << m_releaseAction << ")" << std::endl;
+    }
+    
+    void closeHand() {
+        if (m_useRos2) {
+            publishRos2Command(m_graspAction);
+        } else {
+            closeHandPython();
+        }
+        m_handOpen = false;
+        std::cout << "✊ 灵巧手握拳 (" << m_graspAction << ")" << std::endl;
+    }
+    
+    void toggleHand() {
+        if (m_handOpen) {
+            closeHand();
+        } else {
+            openHand();
+        }
+    }
+    
+    bool isHandOpen() const {
+        return m_handOpen;
+    }
+    
+    bool isInitialized() const {
+        if (m_useRos2) {
+#ifdef USE_ROS2
+            return m_ros2Node && m_ros2Publisher;
+#else
+            return false;
+#endif
+        } else {
+            return m_pythonInitialized;
+        }
+    }
+    
+private:
+    bool initializeRos2() {
+#ifdef USE_ROS2
+        try {
+            // 创建ROS2节点
+            std::string nodeName = "dexterous_hand_controller_" + m_handType;
+            m_ros2Node = rclcpp::Node::make_shared(nodeName);
+            
+            // 创建发布者
+            m_ros2Publisher = m_ros2Node->create_publisher<std_msgs::msg::String>(
+                m_ros2TopicName, 10);
+            
+            std::cout << "✅ ROS2灵巧手控制器初始化成功: " << m_handType << " " 
+                      << m_handJoint << " (话题: " << m_ros2TopicName << ")" << std::endl;
+            
+            // 初始化为张开状态
+            openHand();
+            
+            return true;
+            
+        } catch (const std::exception& e) {
+            std::cerr << "❌ ROS2灵巧手初始化异常: " << e.what() << std::endl;
+            return false;
+        }
+#else
+        std::cerr << "❌ 程序未编译ROS2支持，无法使用ROS2模式" << std::endl;
+        return false;
+#endif
+    }
+    
+    bool initializePython() {
         try {
             // 初始化Python环境
             if (!Py_IsInitialized()) {
@@ -156,52 +265,6 @@ public:
             std::cerr << "❌ 灵巧手初始化异常: " << e.what() << std::endl;
             return false;
         }
-    }
-    
-    void openHand() {
-        if (!m_pythonInitialized || !m_handInstance) {
-            std::cerr << "❌ 灵巧手未初始化" << std::endl;
-            return;
-        }
-        
-        try {
-            executeAction(m_releaseAction);
-            m_handOpen = true;
-            std::cout << "👋 灵巧手张开 (" << m_releaseAction << ")" << std::endl;
-        } catch (const std::exception& e) {
-            std::cerr << "❌ 张开手掌时发生异常: " << e.what() << std::endl;
-        }
-    }
-    
-    void closeHand() {
-        if (!m_pythonInitialized || !m_handInstance) {
-            std::cerr << "❌ 灵巧手未初始化" << std::endl;
-            return;
-        }
-        
-        try {
-            executeAction(m_graspAction);
-            m_handOpen = false;
-            std::cout << "✊ 灵巧手握拳 (" << m_graspAction << ")" << std::endl;
-        } catch (const std::exception& e) {
-            std::cerr << "❌ 握拳时发生异常: " << e.what() << std::endl;
-        }
-    }
-    
-    void toggleHand() {
-        if (m_handOpen) {
-            closeHand();
-        } else {
-            openHand();
-        }
-    }
-    
-    bool isHandOpen() const {
-        return m_handOpen;
-    }
-    
-    bool isInitialized() const {
-        return m_pythonInitialized;
     }
     
 private:
@@ -279,17 +342,86 @@ private:
     }
 
     void cleanup() {
-        if (m_handInstance) {
-            Py_DECREF(m_handInstance);
-            m_handInstance = nullptr;
+        if (m_useRos2) {
+#ifdef USE_ROS2
+            // ROS2模式下清理ROS2资源
+            m_ros2Publisher.reset();
+            m_ros2Node.reset();
+#endif
+        } else {
+            // Python模式下清理Python资源
+            if (m_handInstance) {
+                Py_DECREF(m_handInstance);
+                m_handInstance = nullptr;
+            }
+            
+            if (m_handModule) {
+                Py_DECREF(m_handModule);
+                m_handModule = nullptr;
+            }
+            m_pythonInitialized = false;
+        }
+    }
+    
+private:
+    void openHandPython() {
+        if (!m_pythonInitialized || !m_handInstance) {
+            std::cerr << "❌ 灵巧手未初始化" << std::endl;
+            return;
         }
         
-        if (m_handModule) {
-            Py_DECREF(m_handModule);
-            m_handModule = nullptr;
+        try {
+            executeAction(m_releaseAction);
+        } catch (const std::exception& e) {
+            std::cerr << "❌ 张开手掌时发生异常: " << e.what() << std::endl;
         }
-        m_pythonInitialized = false;
     }
+    
+    void closeHandPython() {
+        if (!m_pythonInitialized || !m_handInstance) {
+            std::cerr << "❌ 灵巧手未初始化" << std::endl;
+            return;
+        }
+        
+        try {
+            executeAction(m_graspAction);
+        } catch (const std::exception& e) {
+            std::cerr << "❌ 握拳时发生异常: " << e.what() << std::endl;
+        }
+    }
+    
+#ifdef USE_ROS2
+    void publishRos2Command(const std::string& action) {
+        if (!m_ros2Node || !m_ros2Publisher) {
+            std::cerr << "❌ ROS2节点未初始化" << std::endl;
+            return;
+        }
+        
+        try {
+            // 创建JSON格式的控制消息
+            std::ostringstream json_msg;
+            json_msg << "{";
+            json_msg << "\"hand_type\":\"" << m_handType << "\",";
+            json_msg << "\"hand_joint\":\"" << m_handJoint << "\",";
+            json_msg << "\"action\":\"" << action << "\",";
+            json_msg << "\"timestamp\":" << std::chrono::duration_cast<std::chrono::milliseconds>(
+                std::chrono::system_clock::now().time_since_epoch()).count();
+            json_msg << "}";
+            
+            auto message = std_msgs::msg::String();
+            message.data = json_msg.str();
+            
+            m_ros2Publisher->publish(message);
+            
+            std::cout << "📡 ROS2话题发布: " << m_ros2TopicName << " -> " << action << std::endl;
+            
+        } catch (const std::exception& e) {
+            std::cerr << "❌ ROS2消息发布异常: " << e.what() << std::endl;
+        }
+    }
+#endif
+
+    // ...existing code...
 };
 
 // 机械臂控制类
@@ -325,12 +457,30 @@ public:
     }
     
     bool connect() {
+        std::cout << "🔄 正在连接机械臂 " << m_robotIP << ":" << m_robotPort << " ..." << std::endl;
+        
         // 创建socket
         m_socket = socket(AF_INET, SOCK_STREAM, 0);
         if (m_socket < 0) {
-            std::cerr << "创建socket失败" << std::endl;
+            std::cerr << "❌ 创建socket失败" << std::endl;
             return false;
         }
+        
+        // 设置连接超时
+        struct timeval timeout;
+        timeout.tv_sec = 3;   // 3秒超时
+        timeout.tv_usec = 0;
+        
+        #if defined(WIN32)
+        // Windows socket超时设置
+        DWORD timeoutMs = 3000;
+        setsockopt(m_socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeoutMs, sizeof(timeoutMs));
+        setsockopt(m_socket, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeoutMs, sizeof(timeoutMs));
+        #else
+        // Linux socket超时设置
+        setsockopt(m_socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
+        setsockopt(m_socket, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout, sizeof(timeout));
+        #endif
         
         // 设置服务器地址
         struct sockaddr_in serverAddr;
@@ -341,17 +491,29 @@ public:
         
         // 连接到服务器
         if (::connect(m_socket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
-            std::cerr << "连接机械臂失败: " << m_robotIP << ":" << m_robotPort << std::endl;
+            std::cerr << "❌ 连接机械臂失败: " << m_robotIP << ":" << m_robotPort;
             #if defined(WIN32)
+            int errorCode = WSAGetLastError();
+            if (errorCode == WSAETIMEDOUT) {
+                std::cerr << " (连接超时)" << std::endl;
+            } else {
+                std::cerr << " (错误代码: " << errorCode << ")" << std::endl;
+            }
             closesocket(m_socket);
             #else
+            if (errno == ETIMEDOUT || errno == ECONNREFUSED) {
+                std::cerr << " (连接超时或拒绝连接)" << std::endl;
+            } else {
+                std::cerr << " (错误: " << strerror(errno) << ")" << std::endl;
+            }
             close(m_socket);
             #endif
+            m_socket = -1;
             return false;
         }
         
         m_connected = true;
-        std::cout << "成功连接到机械臂: " << m_robotIP << ":" << m_robotPort << std::endl;
+        std::cout << "✅ 成功连接到机械臂: " << m_robotIP << ":" << m_robotPort << std::endl;
         return true;
     }
     
@@ -1034,15 +1196,27 @@ public:
                 std::string canInterface = m_config->getString(prefix + ".can_interface", "can0");
                 std::string graspAction = m_config->getString(prefix + ".grasp_action", "ZQ");
                 std::string releaseAction = m_config->getString(prefix + ".release_action", "张开");
+                bool useRos2 = m_config->getBool(prefix + ".use_ros2", false);
+                std::string ros2TopicName = m_config->getString(prefix + ".ros2_topic_name", "/dexterous_hand/command");
+                
+                // 调试输出
+                std::cout << "🔍 调试信息: prefix=" << prefix << ", use_ros2键=" << (prefix + ".use_ros2") << ", 读取值=" << (useRos2 ? "true" : "false") << std::endl;
                 
                 std::cout << "[" << m_deviceName << "] 正在初始化灵巧手..." << std::endl;
                 std::cout << "   手型: " << handType << std::endl;
                 std::cout << "   关节: " << handJoint << std::endl;
-                std::cout << "   CAN接口: " << canInterface << std::endl;
+                if (useRos2) {
+                    std::cout << "   控制方式: ROS2话题" << std::endl;
+                    std::cout << "   话题名称: " << ros2TopicName << std::endl;
+                } else {
+                    std::cout << "   控制方式: CAN直接控制" << std::endl;
+                    std::cout << "   CAN接口: " << canInterface << std::endl;
+                }
                 std::cout << "   抓取动作: " << graspAction << std::endl;
                 std::cout << "   松开动作: " << releaseAction << std::endl;
                 
-                m_handController = new DexterousHandController(handType, handJoint, canInterface, graspAction, releaseAction);
+                m_handController = new DexterousHandController(handType, handJoint, canInterface, 
+                                                             graspAction, releaseAction, useRos2, ros2TopicName);
                 
                 if (m_handController->initialize()) {
                     std::cout << "✅ [" << m_deviceName << "] 灵巧手初始化成功" << std::endl;
@@ -1436,7 +1610,7 @@ private:
 };
 
 // 全局变量 - 双设备支持
-ConfigLoader g_config("config.ini");
+ConfigLoader* g_config = nullptr;  // 改为指针，支持动态配置文件
 ArmController* g_armController1 = nullptr;    // 机械臂1控制器
 ArmController* g_armController2 = nullptr;    // 机械臂2控制器
 TouchArmController* g_touchArmController1 = nullptr;  // 触觉设备1控制器
@@ -1461,16 +1635,41 @@ void cleanupDevices();
  主函数
 *******************************************************************************/
 int main(int argc, char* argv[])
-{    
+{
+    // 处理命令行参数
+    std::string configFile = "config.ini";  // 默认配置文件
+    if (argc > 1) {
+        configFile = argv[1];
+        std::cout << "📄 使用指定配置文件: " << configFile << std::endl;
+    } else {
+        // 检查环境变量
+        const char* envConfig = getenv("TOUCH_CONTROLLER_CONFIG");
+        if (envConfig) {
+            configFile = envConfig;
+            std::cout << "📄 使用环境变量指定的配置文件: " << configFile << std::endl;
+        } else {
+            std::cout << "📄 使用默认配置文件: " << configFile << std::endl;
+        }
+    }
+    
+    // 创建配置加载器
+    g_config = new ConfigLoader(configFile);
+
+#ifdef USE_ROS2
+    // 如果编译了ROS2支持，初始化ROS2
+    rclcpp::init(argc, argv);
+    std::cout << "✅ ROS2初始化完成" << std::endl;
+#endif
+
     // 加载配置文件
     std::cout << "=== 加载配置文件 ===" << std::endl;
-    g_config.loadConfig();
+    g_config->loadConfig();
     
     // 从配置文件获取机械臂连接参数
-    std::string robot1IP = g_config.getString("robot1.ip", "192.168.10.18");
-    int robot1Port = g_config.getInt("robot1.port", 8080);
-    std::string robot2IP = g_config.getString("robot2.ip", "192.168.10.19");
-    int robot2Port = g_config.getInt("robot2.port", 8080);
+    std::string robot1IP = g_config->getString("robot1.ip", "192.168.10.18");
+    int robot1Port = g_config->getInt("robot1.port", 8080);
+    std::string robot2IP = g_config->getString("robot2.ip", "192.168.10.19");
+    int robot2Port = g_config->getInt("robot2.port", 8080);
     
     std::cout << "机械臂1 IP: " << robot1IP << ", 端口: " << robot1Port << std::endl;
     std::cout << "机械臂2 IP: " << robot2IP << ", 端口: " << robot2Port << std::endl;
@@ -1480,8 +1679,8 @@ int main(int argc, char* argv[])
     g_armController2 = new ArmController(robot2IP, robot2Port);
     
     // 创建触觉控制器（延迟构造以便在配置文件加载后）
-    g_touchArmController1 = new TouchArmController(*g_armController1, &g_config, "device1");
-    g_touchArmController2 = new TouchArmController(*g_armController2, &g_config, "device2");
+    g_touchArmController1 = new TouchArmController(*g_armController1, g_config, "device1");
+    g_touchArmController2 = new TouchArmController(*g_armController2, g_config, "device2");
 
     // 连接机械臂
     std::cout << "\n=== 连接机械臂 ===" << std::endl;
@@ -1520,6 +1719,13 @@ int main(int argc, char* argv[])
         {
             handleKeyboard();
         }
+
+#ifdef USE_ROS2
+        // 处理ROS2回调
+        if (rclcpp::ok()) {
+            rclcpp::spin_some(rclcpp::Node::make_shared("dummy_spinner"));
+        }
+#endif
         
         // 短暂延时
         #if defined(WIN32)
@@ -1531,6 +1737,10 @@ int main(int argc, char* argv[])
 
     // 清理工作
     cleanupDevices();
+    
+    // 释放配置对象内存
+    delete g_config;
+    g_config = nullptr;
 
     printf("\n程序已退出.\n");
     return 0;
@@ -1550,8 +1760,8 @@ void initializeDevices()
     // 重要：所有设备实例需要在启动调度器之前创建
     
     // 初始化设备1 - 从配置文件读取设备名称
-    std::string device1Primary = g_config.getString("device_names.device1_primary", "PHANToM 1");
-    std::string device1Fallback = g_config.getString("device_names.device1_fallback", "Default Device");
+    std::string device1Primary = g_config->getString("device_names.device1_primary", "PHANToM 1");
+    std::string device1Fallback = g_config->getString("device_names.device1_fallback", "Default Device");
     
     std::cout << "步骤1: 初始化设备1 (" << device1Primary << ")..." << std::endl;
     g_hHD1 = hdInitDevice(device1Primary.c_str());
@@ -1580,8 +1790,8 @@ void initializeDevices()
     }
 
     // 初始化设备2 - 从配置文件读取设备名称
-    std::string device2Primary = g_config.getString("device_names.device2_primary", "PHANToM 2");
-    std::string device2Fallbacks = g_config.getString("device_names.device2_fallback", "Device1,PHANTOM 2,PHANToM Device 2");
+    std::string device2Primary = g_config->getString("device_names.device2_primary", "PHANToM 2");
+    std::string device2Fallbacks = g_config->getString("device_names.device2_fallback", "Device1,PHANTOM 2,PHANToM Device 2");
     
     std::cout << "步骤2: 初始化设备2 (" << device2Primary << ")..." << std::endl;
     g_hHD2 = hdInitDevice(device2Primary.c_str());
@@ -1894,6 +2104,14 @@ void cleanupDevices()
     g_touchArmController2 = nullptr;
     g_armController1 = nullptr;
     g_armController2 = nullptr;
+
+#ifdef USE_ROS2
+    // 清理ROS2
+    if (rclcpp::ok()) {
+        rclcpp::shutdown();
+        std::cout << "✅ ROS2清理完成" << std::endl;
+    }
+#endif
 }
 
 /*******************************************************************************
@@ -2003,9 +2221,9 @@ void handleKeyboard()
         case 'F':
             {
                 // 切换坐标系类型
-                int currentFrameType = g_config.getInt("system.teach_frame_type", 1);
+                int currentFrameType = g_config->getInt("system.teach_frame_type", 1);
                 int newFrameType = (currentFrameType == 0) ? 1 : 0;
-                g_config.setInt("system.teach_frame_type", newFrameType);
+                g_config->setInt("system.teach_frame_type", newFrameType);
                 
                 std::cout << "\n=== 切换坐标系类型 ===" << std::endl;
                 std::cout << "从 " << (currentFrameType == 0 ? "基坐标系" : "工具坐标系") 
@@ -2024,37 +2242,37 @@ void handleKeyboard()
                 // 显示设备1配置
                 std::cout << "设备1 (device1_mapping):" << std::endl;
                 std::cout << "  位置映射: [" 
-                          << g_config.getInt("device1_mapping.touch_pos_to_arm_x", 2) << "→X, "
-                          << g_config.getInt("device1_mapping.touch_pos_to_arm_y", 0) << "→Y, "
-                          << g_config.getInt("device1_mapping.touch_pos_to_arm_z", 1) << "→Z]" << std::endl;
+                          << g_config->getInt("device1_mapping.touch_pos_to_arm_x", 2) << "→X, "
+                          << g_config->getInt("device1_mapping.touch_pos_to_arm_y", 0) << "→Y, "
+                          << g_config->getInt("device1_mapping.touch_pos_to_arm_z", 1) << "→Z]" << std::endl;
                 std::cout << "  姿态映射: [" 
-                          << g_config.getInt("device1_mapping.touch_rot_to_arm_rx", 2) << "→RX, "
-                          << g_config.getInt("device1_mapping.touch_rot_to_arm_ry", 0) << "→RY, "
-                          << g_config.getInt("device1_mapping.touch_rot_to_arm_rz", 1) << "→RZ]" << std::endl;
+                          << g_config->getInt("device1_mapping.touch_rot_to_arm_rx", 2) << "→RX, "
+                          << g_config->getInt("device1_mapping.touch_rot_to_arm_ry", 0) << "→RY, "
+                          << g_config->getInt("device1_mapping.touch_rot_to_arm_rz", 1) << "→RZ]" << std::endl;
                 std::cout << "  符号调整: [" 
-                          << g_config.getInt("device1_mapping.arm_x_sign", -1) << ", "
-                          << g_config.getInt("device1_mapping.arm_y_sign", -1) << ", "
-                          << g_config.getInt("device1_mapping.arm_z_sign", 1) << ", "
-                          << g_config.getInt("device1_mapping.arm_rx_sign", -1) << ", "
-                          << g_config.getInt("device1_mapping.arm_ry_sign", -1) << ", "
-                          << g_config.getInt("device1_mapping.arm_rz_sign", 1) << "]" << std::endl;
+                          << g_config->getInt("device1_mapping.arm_x_sign", -1) << ", "
+                          << g_config->getInt("device1_mapping.arm_y_sign", -1) << ", "
+                          << g_config->getInt("device1_mapping.arm_z_sign", 1) << ", "
+                          << g_config->getInt("device1_mapping.arm_rx_sign", -1) << ", "
+                          << g_config->getInt("device1_mapping.arm_ry_sign", -1) << ", "
+                          << g_config->getInt("device1_mapping.arm_rz_sign", 1) << "]" << std::endl;
                 
                 std::cout << "\n设备2 (device2_mapping):" << std::endl;
                 std::cout << "  位置映射: [" 
-                          << g_config.getInt("device2_mapping.touch_pos_to_arm_x", 0) << "→X, "
-                          << g_config.getInt("device2_mapping.touch_pos_to_arm_y", 1) << "→Y, "
-                          << g_config.getInt("device2_mapping.touch_pos_to_arm_z", 2) << "→Z]" << std::endl;
+                          << g_config->getInt("device2_mapping.touch_pos_to_arm_x", 0) << "→X, "
+                          << g_config->getInt("device2_mapping.touch_pos_to_arm_y", 1) << "→Y, "
+                          << g_config->getInt("device2_mapping.touch_pos_to_arm_z", 2) << "→Z]" << std::endl;
                 std::cout << "  姿态映射: [" 
-                          << g_config.getInt("device2_mapping.touch_rot_to_arm_rx", 0) << "→RX, "
-                          << g_config.getInt("device2_mapping.touch_rot_to_arm_ry", 1) << "→RY, "
-                          << g_config.getInt("device2_mapping.touch_rot_to_arm_rz", 2) << "→RZ]" << std::endl;
+                          << g_config->getInt("device2_mapping.touch_rot_to_arm_rx", 0) << "→RX, "
+                          << g_config->getInt("device2_mapping.touch_rot_to_arm_ry", 1) << "→RY, "
+                          << g_config->getInt("device2_mapping.touch_rot_to_arm_rz", 2) << "→RZ]" << std::endl;
                 std::cout << "  符号调整: [" 
-                          << g_config.getInt("device2_mapping.arm_x_sign", 1) << ", "
-                          << g_config.getInt("device2_mapping.arm_y_sign", 1) << ", "
-                          << g_config.getInt("device2_mapping.arm_z_sign", -1) << ", "
-                          << g_config.getInt("device2_mapping.arm_rx_sign", 1) << ", "
-                          << g_config.getInt("device2_mapping.arm_ry_sign", 1) << ", "
-                          << g_config.getInt("device2_mapping.arm_rz_sign", -1) << "]" << std::endl;
+                          << g_config->getInt("device2_mapping.arm_x_sign", 1) << ", "
+                          << g_config->getInt("device2_mapping.arm_y_sign", 1) << ", "
+                          << g_config->getInt("device2_mapping.arm_z_sign", -1) << ", "
+                          << g_config->getInt("device2_mapping.arm_rx_sign", 1) << ", "
+                          << g_config->getInt("device2_mapping.arm_ry_sign", 1) << ", "
+                          << g_config->getInt("device2_mapping.arm_rz_sign", -1) << "]" << std::endl;
                           
                 std::cout << "\n说明:" << std::endl;
                 std::cout << "  位置映射: 触觉设备轴索引(0=X,1=Y,2=Z) → 机械臂轴" << std::endl;
@@ -2115,8 +2333,8 @@ void printInstructions()
     printf("  修改config.ini的device*_mapping节可自定义映射\n");
     printf("\n");
     // 从配置文件读取坐标系信息进行显示
-    int frameType = g_config.getInt("system.teach_frame_type", 1);
-    std::string toolName = g_config.getString("system.tool_coordinate_name", "Arm_Tip");
+    int frameType = g_config->getInt("system.teach_frame_type", 1);
+    std::string toolName = g_config->getString("system.tool_coordinate_name", "Arm_Tip");
     
     printf("控制模式: %s控制 (%s)\n", 
            frameType == 0 ? "基坐标系" : "工具坐标系", toolName.c_str());

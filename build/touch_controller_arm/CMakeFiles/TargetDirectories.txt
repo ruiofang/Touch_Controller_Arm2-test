@@ -1,0 +1,15 @@
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/uninstall.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/touch_controller_arm_uninstall.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/Touch_Controller_Arm2.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/run.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/clean-all.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/check-config.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/package.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/package_source.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/test.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/edit_cache.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/rebuild_cache.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/list_install_components.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/install.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/install/local.dir
+/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles/install/strip.dir

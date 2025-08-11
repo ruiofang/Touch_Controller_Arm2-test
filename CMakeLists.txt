@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # 项目信息
-project(DualTouchArmController 
+project(touch_controller_arm 
     VERSION 1.0.0
     DESCRIPTION "双Touch设备双机械臂控制系统"
     LANGUAGES CXX C)
@@ -54,6 +54,30 @@ endif()
 # 查找系统库
 find_package(Threads REQUIRED)
 
+# 查找Python（仅在非ROS2模式下需要）
+if(NOT ROS2_FOUND)
+    find_package(Python3 COMPONENTS Interpreter Development QUIET)
+    if(Python3_FOUND)
+        message(STATUS "找到Python: ${Python3_VERSION}")
+    else()
+        message(WARNING "未找到Python开发包，Python相关功能可能不可用")
+    endif()
+endif()
+
+# 查找ROS2包 (可选)
+find_package(ament_cmake QUIET)
+find_package(rclcpp QUIET)
+find_package(std_msgs QUIET)
+
+if(rclcpp_FOUND AND std_msgs_FOUND)
+    message(STATUS "找到ROS2，启用ROS2支持")
+    set(ROS2_FOUND TRUE)
+    add_definitions(-DUSE_ROS2)
+else()
+    message(STATUS "未找到ROS2，禁用ROS2支持")
+    set(ROS2_FOUND FALSE)
+endif()
+
 find_library(NCURSES_LIBRARY 
     NAMES ncurses
     REQUIRED
@@ -62,17 +86,22 @@ find_library(NCURSES_LIBRARY
 # 包含目录
 include_directories(${OPENHAPTICS_INCLUDE_DIR})
 
+# 如果找到Python，添加Python头文件路径
+if(Python3_FOUND)
+    include_directories(${Python3_INCLUDE_DIRS})
+endif()
+
 # 源文件
 set(SOURCES
-    Touch_Controller_Arm.cpp
+    Touch_Controller_Arm2.cpp
     conio.c
 )
 
 # 创建可执行文件
-add_executable(Touch_Controller_Arm ${SOURCES})
+add_executable(Touch_Controller_Arm2 ${SOURCES})
 
 # 链接库
-target_link_libraries(Touch_Controller_Arm 
+target_link_libraries(Touch_Controller_Arm2 
     ${HD_LIBRARY}
     ${HDU_LIBRARY}
     ${NCURSES_LIBRARY}
@@ -80,26 +109,54 @@ target_link_libraries(Touch_Controller_Arm
     rt
 )
 
-# 设置输出目录
-set_target_properties(Touch_Controller_Arm PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-)
+# 如果找到Python，链接Python库
+if(Python3_FOUND)
+    target_link_libraries(Touch_Controller_Arm2 ${Python3_LIBRARIES})
+endif()
 
-# 安装规则
-install(TARGETS Touch_Controller_Arm
-    RUNTIME DESTINATION bin
-)
+# 如果找到ROS2，添加ROS2依赖
+if(ROS2_FOUND)
+    ament_target_dependencies(Touch_Controller_Arm2 rclcpp std_msgs)
+    message(STATUS "ROS2支持已启用")
+    
+    # 安装规则（ROS2风格）
+    install(TARGETS Touch_Controller_Arm2
+        DESTINATION lib/${PROJECT_NAME}
+    )
+    
+    # 导出包信息
+    ament_package()
+else()
+    # 传统安装规则
+    install(TARGETS Touch_Controller_Arm2
+        RUNTIME DESTINATION bin
+    )
+endif()
 
-install(FILES config.ini
-    DESTINATION etc
-)
+# 设置输出目录 - 仅在非ROS2环境下设置
+if(NOT ROS2_FOUND)
+    set_target_properties(Touch_Controller_Arm2 PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    )
+endif()
 
-install(FILES 
-    "双设备控制说明.md"
-    "双Touch设备使用说明.md"
-    "加载说明.md"
-    DESTINATION share/doc/dual-touch-arm-controller
-)
+# 配置文件复制
+configure_file(config.ini ${CMAKE_CURRENT_SOURCE_DIR}/build/config.ini COPYONLY)
+
+# 安装配置文件
+if(NOT ROS2_FOUND)
+    install(FILES config.ini
+        DESTINATION etc
+    )
+
+    install(FILES 
+        "双设备控制说明.md"
+        "双Touch设备使用说明.md"
+        "加载说明.md"
+        "ROS2集成说明.md"
+        DESTINATION share/doc/dual-touch-arm-controller
+    )
+endif()
 
 # 创建软件包信息
 set(CPACK_GENERATOR "DEB;TGZ")
@@ -113,15 +170,15 @@ include(CPack)
 
 # 自定义目标
 add_custom_target(run
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/Touch_Controller_Arm
-    DEPENDS Touch_Controller_Arm
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/Touch_Controller_Arm2
+    DEPENDS Touch_Controller_Arm2
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "运行双Touch设备双机械臂控制程序"
 )
 
 add_custom_target(clean-all
     COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean
-    COMMAND ${CMAKE_COMMAND} -E remove -f Touch_Controller_Arm
+    COMMAND ${CMAKE_COMMAND} -E remove -f Touch_Controller_Arm2
     COMMAND ${CMAKE_COMMAND} -E remove -f conio.o
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "清理所有生成文件"

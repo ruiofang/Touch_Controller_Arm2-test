@@ -1,0 +1,106 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-199c9124892d57685454.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "touch_controller_arm",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Touch_Controller_Arm2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Touch_Controller_Arm2-Release-6bfcaaf7f723f493f79e.json",
+					"name" : "Touch_Controller_Arm2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "check-config::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-check-config-Release-5925f3fb0d22a00feb31.json",
+					"name" : "check-config",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "clean-all::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-clean-all-Release-87e5a85c4844f706815c.json",
+					"name" : "clean-all",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "run::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-run-Release-0514f23abc167b3c6c29.json",
+					"name" : "run",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "touch_controller_arm_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-touch_controller_arm_uninstall-Release-1e5fca58c30e19a19adf.json",
+					"name" : "touch_controller_arm_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-Release-266ef1bceaa2d2c4af3f.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm",
+		"source" : "/home/ruio/Touch_Controller_Arm2-test3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

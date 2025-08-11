@@ -54,6 +54,12 @@ public:
                 std::string key = trim(line.substr(0, pos));
                 std::string value = trim(line.substr(pos + 1));
                 
+                // 去除值中的注释（以#开始的部分）
+                size_t commentPos = value.find('#');
+                if (commentPos != std::string::npos) {
+                    value = trim(value.substr(0, commentPos));
+                }
+                
                 // 如果有节名，则添加节前缀
                 if (!currentSection.empty()) {
                     key = currentSection + "." + key;
