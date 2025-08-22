@@ -1,0 +1,104 @@
+[0.007s] Invoking command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14
+[0.026s] -- 使用系统OpenHaptics库: /usr/lib
+[0.097s] -- 找到Python: 3.10.12
+[0.168s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.169s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.173s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.179s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.186s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.207s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.207s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.275s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.306s] -- 找到ROS2，启用ROS2支持
+[0.307s] -- ROS2支持已启用
+[0.372s] -- === 双Touch设备双机械臂控制系统 CMake 配置 ===
+[0.372s] -- 项目名称: touch_controller_arm
+[0.372s] -- 项目版本: 1.0.0
+[0.372s] -- 编译类型: Release
+[0.372s] -- C++标准: 11
+[0.373s] -- OpenHaptics: 使用系统库 (/usr/lib)
+[0.373s] -- HD库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHD.so.3.4.0
+[0.373s] -- HDU库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHDU.a
+[0.373s] -- ncurses库: /usr/lib/x86_64-linux-gnu/libncurses.so
+[0.373s] -- ===============================================
+[0.373s] -- Configuring done
+[0.378s] -- Generating done
+[0.381s] -- Build files have been written to: /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm
+[0.399s] [35m[1mConsolidate compiler generated dependencies of target Touch_Controller_Arm2[0m
+[0.415s] [ 25%] [32mBuilding CXX object CMakeFiles/Touch_Controller_Arm2.dir/Touch_Controller_Arm2.cpp.o[0m
+[1.855s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kbool ArmController::moveToTarget(const std::array<int, 6>&, int)[m[K’:
+[1.855s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:745:65:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kvelocity[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.855s]   745 |     bool moveToTarget(const std::array<int, 6>& targetPose, [01;35m[Kint velocity = 50[m[K) {
+[1.855s]       |                                                             [01;35m[K~~~~^~~~~~~~~~~~~[m[K
+[1.856s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kbool ArmController::moveToTargetAsync(const std::array<int, 6>&, int)[m[K’:
+[1.856s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:758:70:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kvelocity[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.857s]   758 |     bool moveToTargetAsync(const std::array<int, 6>& targetPose, [01;35m[Kint velocity = 50[m[K) {
+[1.857s]       |                                                                  [01;35m[K~~~~^~~~~~~~~~~~~[m[K
+[1.861s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In constructor ‘[01m[KTouchArmController::TouchArmController(ArmController&, ConfigLoader*, const string&)[m[K’:
+[1.862s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1040:17:[m[K [01;35m[Kwarning: [m[K‘[01m[KTouchArmController::m_deviceName[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[1.862s]  1040 |     std::string [01;35m[Km_deviceName[m[K;  // 设备名称
+[1.862s]       |                 [01;35m[K^~~~~~~~~~~~[m[K
+[1.862s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1013:27:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kstd::array<double, 3> TouchArmController::m_touchAnchor[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[1.862s]  1013 |     std::array<double, 3> [01;35m[Km_touchAnchor[m[K;      // 触觉设备锚点
+[1.862s]       |                           [01;35m[K^~~~~~~~~~~~~[m[K
+[1.862s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1060:5:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[1.862s]  1060 |     [01;35m[KTouchArmController[m[K(ArmController& armController, ConfigLoader* config = nullptr, const std::string& deviceName = "")
+[1.862s]       |     [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+[1.886s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kstd::array<double, 3> TouchArmController::extractEulerAngles(const std::array<double, 16>&) const[m[K’:
+[1.887s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1688:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr12[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.887s]  1688 |         double [01;35m[Kr12[m[K = transform[4];
+[1.887s]       |                [01;35m[K^~~[m[K
+[1.887s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1689:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr13[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.887s]  1689 |         double [01;35m[Kr13[m[K = transform[8];
+[1.887s]       |                [01;35m[K^~~[m[K
+[1.887s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kstd::array<double, 3> TouchArmController::extractEulerFromTransform(const std::array<double, 16>&) const[m[K’:
+[1.887s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1720:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr12[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.887s]  1720 |         double [01;35m[Kr12[m[K = transform[4];
+[1.887s]       |                [01;35m[K^~~[m[K
+[1.887s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1721:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr13[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.887s]  1721 |         double [01;35m[Kr13[m[K = transform[8];
+[1.887s]       |                [01;35m[K^~~[m[K
+[1.887s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1723:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr22[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.887s]  1723 |         double [01;35m[Kr22[m[K = transform[5];
+[1.888s]       |                [01;35m[K^~~[m[K
+[1.888s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1724:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr23[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.888s]  1724 |         double [01;35m[Kr23[m[K = transform[9];
+[1.888s]       |                [01;35m[K^~~[m[K
+[1.892s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[Kvoid initializeDevices()[m[K’:
+[1.893s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1895:23:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[KhCallback1[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[1.893s]  1895 |     HDSchedulerHandle [01;35m[KhCallback1[m[K, hCallback2;
+[1.893s]       |                       [01;35m[K^~~~~~~~~~[m[K
+[1.893s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1895:35:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[KhCallback2[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[1.893s]  1895 |     HDSchedulerHandle hCallback1, [01;35m[KhCallback2[m[K;
+[1.893s]       |                                   [01;35m[K^~~~~~~~~~[m[K
+[1.893s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[KHDCallbackCode device1Callback(void*)[m[K’:
+[1.893s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2024:49:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kdata[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.893s]  2024 | HDCallbackCode HDCALLBACK device1Callback([01;35m[Kvoid *data[m[K)
+[1.893s]       |                                           [01;35m[K~~~~~~^~~~[m[K
+[1.894s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[KHDCallbackCode device2Callback(void*)[m[K’:
+[1.894s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2121:49:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kdata[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[1.894s]  2121 | HDCallbackCode HDCALLBACK device2Callback([01;35m[Kvoid *data[m[K)
+[1.894s]       |                                           [01;35m[K~~~~~~^~~~[m[K
+[4.517s] [ 50%] [32m[1mLinking CXX executable Touch_Controller_Arm2[0m
+[4.622s] [100%] Built target Touch_Controller_Arm2
+[4.633s] Invoked command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14
+[4.643s] Invoking command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm
+[4.648s] -- Install configuration: "Release"
+[4.649s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/lib/touch_controller_arm/Touch_Controller_Arm2
+[4.649s] -- Set runtime path of "/home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/lib/touch_controller_arm/Touch_Controller_Arm2" to ""
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/package_run_dependencies/touch_controller_arm
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/parent_prefix_path/touch_controller_arm
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.sh
+[4.649s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.dsv
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.sh
+[4.649s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.dsv
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.bash
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.sh
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.zsh
+[4.649s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.dsv
+[4.649s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.dsv
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/packages/touch_controller_arm
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig.cmake
+[4.649s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig-version.cmake
+[4.650s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.xml
+[4.651s] Invoked command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm

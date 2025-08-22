@@ -1,0 +1,55 @@
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kbool ArmController::moveToTarget(const std::array<int, 6>&, int)[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:745:65:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kvelocity[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  745 |    bool moveToTarget(const std::array<int, 6>& targetPose, [01;35m[Kint velocity = 50[m[K) {
+      |                                                            [01;35m[K~~~~^~~~~~~~~~~~~[m[K
+
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kbool ArmController::moveToTargetAsync(const std::array<int, 6>&, int)[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:758:70:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kvelocity[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  758 | ol moveToTargetAsync(const std::array<int, 6>& targetPose, [01;35m[Kint velocity = 50[m[K) {
+      |                                                            [01;35m[K~~~~^~~~~~~~~~~~~[m[K
+
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In constructor ‘[01m[KTouchArmController::TouchArmController(ArmController&, ConfigLoader*, const string&)[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1051:17:[m[K [01;35m[Kwarning: [m[K‘[01m[KTouchArmController::m_deviceName[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+ 1051 |     std::string [01;35m[Km_deviceName[m[K;  // 设备名称
+      |                 [01;35m[K^~~~~~~~~~~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1024:27:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kstd::array<double, 3> TouchArmController::m_touchAnchor[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+ 1024 |     std::array<double, 3> [01;35m[Km_touchAnchor[m[K;      // 触觉设备锚点
+      |                           [01;35m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1071:5:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+ 1071 |     [01;35m[KTouchArmController[m[K(ArmController& armController, ConfigLoader* config = nullptr, const std::string& deviceName = "")
+      |     [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kstd::array<double, 3> TouchArmController::extractEulerAngles(const std::array<double, 16>&) const[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1700:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr12[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 1700 |         double [01;35m[Kr12[m[K = transform[4];
+      |                [01;35m[K^~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1701:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr13[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 1701 |         double [01;35m[Kr13[m[K = transform[8];
+      |                [01;35m[K^~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kstd::array<double, 3> TouchArmController::extractEulerFromTransform(const std::array<double, 16>&) const[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1732:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr12[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 1732 |         double [01;35m[Kr12[m[K = transform[4];
+      |                [01;35m[K^~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1733:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr13[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 1733 |         double [01;35m[Kr13[m[K = transform[8];
+      |                [01;35m[K^~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1735:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr22[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 1735 |         double [01;35m[Kr22[m[K = transform[5];
+      |                [01;35m[K^~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1736:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr23[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+ 1736 |         double [01;35m[Kr23[m[K = transform[9];
+      |                [01;35m[K^~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[Kvoid initializeDevices()[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1907:23:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[KhCallback1[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+ 1907 |     HDSchedulerHandle [01;35m[KhCallback1[m[K, hCallback2;
+      |                       [01;35m[K^~~~~~~~~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1907:35:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[KhCallback2[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+ 1907 |     HDSchedulerHandle hCallback1, [01;35m[KhCallback2[m[K;
+      |                                   [01;35m[K^~~~~~~~~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[KHDCallbackCode device1Callback(void*)[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2036:49:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kdata[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+ 2036 | HDCallbackCode HDCALLBACK device1Callback([01;35m[Kvoid *data[m[K)
+      |                                           [01;35m[K~~~~~~^~~~[m[K
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[KHDCallbackCode device2Callback(void*)[m[K’:
+[01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2133:49:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kdata[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+ 2133 | HDCallbackCode HDCALLBACK device2Callback([01;35m[Kvoid *data[m[K)
+      |                                           [01;35m[K~~~~~~^~~~[m[K

@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Touch_Controller_Arm2.dir/ConfigLoader.cpp.o"
+  "CMakeFiles/Touch_Controller_Arm2.dir/ConfigLoader.cpp.o.d"
   "CMakeFiles/Touch_Controller_Arm2.dir/Touch_Controller_Arm2.cpp.o"
   "CMakeFiles/Touch_Controller_Arm2.dir/Touch_Controller_Arm2.cpp.o.d"
   "CMakeFiles/Touch_Controller_Arm2.dir/conio.c.o"

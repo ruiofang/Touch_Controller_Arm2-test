@@ -69,7 +69,8 @@ include CMakeFiles/check-config.dir/progress.make
 CMakeFiles/check-config:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) 显示项目配置信息
 	/usr/bin/cmake -E echo 检查项目配置:
-	/usr/bin/cmake -E echo \ \ OpenHaptics路径:\ /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64
+	/usr/bin/cmake -E echo \ \ OpenHaptics类型:\ /home/ruio/Touch_Controller_Arm2-test3使用系统库
+	/usr/bin/cmake -E echo \ \ OpenHaptics路径:\ /usr/lib
 	/usr/bin/cmake -E echo \ \ HD库:\ /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHD.so.3.4.0
 	/usr/bin/cmake -E echo \ \ HDU库:\ /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHDU.a
 	/usr/bin/cmake -E echo \ \ ncurses库:\ /usr/lib/x86_64-linux-gnu/libncurses.so

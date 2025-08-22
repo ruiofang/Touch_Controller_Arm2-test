@@ -8,10 +8,9 @@ CXXFLAGS = -std=c++11 -Wall -Wextra -O3
 CFLAGS = -Wall -Wextra -O3
 LDFLAGS = 
 
-# OpenHaptics 路径设置
-OPENHAPTICS_ROOT = ./OpenHaptics/openhaptics_3.4-0-developer-edition-amd64
-OPENHAPTICS_INCLUDE = $(OPENHAPTICS_ROOT)/usr/include
-OPENHAPTICS_LIB = $(OPENHAPTICS_ROOT)/usr/lib
+# OpenHaptics 路径设置（使用系统路径）
+OPENHAPTICS_INCLUDE = /usr/include
+OPENHAPTICS_LIB = /usr/lib
 
 # Python 设置
 PYTHON_INCLUDE = $(shell python3-config --includes)
@@ -24,8 +23,8 @@ INCLUDES = -I$(OPENHAPTICS_INCLUDE) $(PYTHON_INCLUDE)
 LIBS = -L$(OPENHAPTICS_LIB) -lHD -lHDU -lrt -lpthread -lncurses $(PYTHON_LIBS)
 
 # 源文件
-SOURCES = Touch_Controller_Arm2.cpp conio.c
-OBJECTS = Touch_Controller_Arm2.o conio.o
+SOURCES = Touch_Controller_Arm2.cpp conio.c ConfigLoader.cpp
+OBJECTS = Touch_Controller_Arm2.o conio.o ConfigLoader.o
 TARGET = Touch_Controller_Arm2
 
 # 配置文件

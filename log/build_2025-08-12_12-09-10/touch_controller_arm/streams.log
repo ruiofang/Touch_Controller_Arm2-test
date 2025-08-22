@@ -1,0 +1,140 @@
+[0.008s] Invoking command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14
+[0.026s] -- 使用系统OpenHaptics库: /usr/lib
+[0.107s] -- 找到Python: 3.10.12
+[0.182s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.183s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.187s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.193s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.201s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.223s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.223s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.295s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.326s] -- 找到ROS2，启用ROS2支持
+[0.327s] -- ROS2支持已启用
+[0.401s] -- === 双Touch设备双机械臂控制系统 CMake 配置 ===
+[0.401s] -- 项目名称: touch_controller_arm
+[0.401s] -- 项目版本: 1.0.0
+[0.401s] -- 编译类型: Release
+[0.401s] -- C++标准: 11
+[0.401s] -- OpenHaptics: 使用系统库 (/usr/lib)
+[0.402s] -- HD库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHD.so.3.4.0
+[0.402s] -- HDU库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHDU.a
+[0.402s] -- ncurses库: /usr/lib/x86_64-linux-gnu/libncurses.so
+[0.402s] -- ===============================================
+[0.402s] -- Configuring done
+[0.408s] -- Generating done
+[0.412s] -- Build files have been written to: /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm
+[0.444s] [35m[1mConsolidate compiler generated dependencies of target Touch_Controller_Arm2[0m
+[0.459s] [ 33%] [32mBuilding CXX object CMakeFiles/Touch_Controller_Arm2.dir/Touch_Controller_Arm2.cpp.o[0m
+[2.017s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kbool ArmController::moveToTarget(const std::array<int, 6>&, int)[m[K’:
+[2.017s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:745:65:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kvelocity[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.017s]   745 |     bool moveToTarget(const std::array<int, 6>& targetPose, [01;35m[Kint velocity = 50[m[K) {
+[2.017s]       |                                                             [01;35m[K~~~~^~~~~~~~~~~~~[m[K
+[2.019s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kbool ArmController::moveToTargetAsync(const std::array<int, 6>&, int)[m[K’:
+[2.019s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:758:70:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kvelocity[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.019s]   758 |     bool moveToTargetAsync(const std::array<int, 6>& targetPose, [01;35m[Kint velocity = 50[m[K) {
+[2.019s]       |                                                                  [01;35m[K~~~~^~~~~~~~~~~~~[m[K
+[2.027s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K At global scope:
+[2.027s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1039:5:[m[K [01;31m[Kerror: [m[K‘[01m[KConfigLoader[m[K’ does not name a type
+[2.027s]  1039 |     [01;31m[KConfigLoader[m[K* m_config;    // 配置文件加载器
+[2.027s]       |     [01;31m[K^~~~~~~~~~~~[m[K
+[2.027s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1056:54:[m[K [01;31m[Kerror: [m[K‘[01m[KConfigLoader[m[K’ has not been declared
+[2.027s]  1056 |     TouchArmController(ArmController& armController, [01;31m[KConfigLoader[m[K* config = nullptr, const std::string& deviceName = "")
+[2.027s]       |                                                      [01;31m[K^~~~~~~~~~~~[m[K
+[2.027s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In constructor ‘[01m[KTouchArmController::TouchArmController(ArmController&, int*, const string&)[m[K’:
+[2.027s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1057:62:[m[K [01;31m[Kerror: [m[Kclass ‘[01m[KTouchArmController[m[K’ does not have any field named ‘[01m[Km_config[m[K’
+[2.027s]  1057 |         : m_dragging(false), m_armController(armController), [01;31m[Km_config[m[K(config), m_deviceName(deviceName),
+[2.027s]       |                                                              [01;31m[K^~~~~~~~[m[K
+[2.028s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1040:17:[m[K [01;35m[Kwarning: [m[K‘[01m[KTouchArmController::m_deviceName[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.028s]  1040 |     std::string [01;35m[Km_deviceName[m[K;  // 设备名称
+[2.028s]       |                 [01;35m[K^~~~~~~~~~~~[m[K
+[2.028s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1013:27:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kstd::array<double, 3> TouchArmController::m_touchAnchor[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.028s]  1013 |     std::array<double, 3> [01;35m[Km_touchAnchor[m[K;      // 触觉设备锚点
+[2.028s]       |                           [01;35m[K^~~~~~~~~~~~~[m[K
+[2.028s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1056:5:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[2.028s]  1056 |     [01;35m[KTouchArmController[m[K(ArmController& armController, ConfigLoader* config = nullptr, const std::string& deviceName = "")
+[2.028s]       |     [01;35m[K^~~~~~~~~~~~~~~~~~[m[K
+[2.033s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1070:13:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope; did you mean ‘[01m[Kconfig[m[K’?
+[2.033s]  1070 |         if ([01;31m[Km_config[m[K) {
+[2.033s]       |             [01;31m[K^~~~~~~~[m[K
+[2.033s]       |             [32m[Kconfig[m[K
+[2.041s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1151:17:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope; did you mean ‘[01m[Kconfig[m[K’?
+[2.041s]  1151 |             if ([01;31m[Km_config[m[K) {
+[2.041s]       |                 [01;31m[K^~~~~~~~[m[K
+[2.042s]       |                 [32m[Kconfig[m[K
+[2.047s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1159:17:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope; did you mean ‘[01m[Kconfig[m[K’?
+[2.047s]  1159 |             if ([01;31m[Km_config[m[K) {
+[2.047s]       |                 [01;31m[K^~~~~~~~[m[K
+[2.047s]       |                 [32m[Kconfig[m[K
+[2.053s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1168:17:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope; did you mean ‘[01m[Kconfig[m[K’?
+[2.053s]  1168 |             if ([01;31m[Km_config[m[K) {
+[2.053s]       |                 [01;31m[K^~~~~~~~[m[K
+[2.053s]       |                 [32m[Kconfig[m[K
+[2.060s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kvoid TouchArmController::initializeEndEffector()[m[K’:
+[2.060s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1193:13:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope
+[2.060s]  1193 |         if ([01;31m[Km_config[m[K) {
+[2.060s]       |             [01;31m[K^~~~~~~~[m[K
+[2.069s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kvoid TouchArmController::setPositionScale(double)[m[K’:
+[2.069s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1267:13:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope
+[2.069s]  1267 |         if ([01;31m[Km_config[m[K) {
+[2.069s]       |             [01;31m[K^~~~~~~~[m[K
+[2.075s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kvoid TouchArmController::setRotationScale(double)[m[K’:
+[2.075s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1277:13:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope
+[2.075s]  1277 |         if ([01;31m[Km_config[m[K) {
+[2.075s]       |             [01;31m[K^~~~~~~~[m[K
+[2.081s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kvoid TouchArmController::setSpringStiffness(double)[m[K’:
+[2.081s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1290:13:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope
+[2.081s]  1290 |         if ([01;31m[Km_config[m[K) {
+[2.081s]       |             [01;31m[K^~~~~~~~[m[K
+[2.087s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kvoid TouchArmController::saveConfig()[m[K’:
+[2.087s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1300:13:[m[K [01;31m[Kerror: [m[K‘[01m[Km_config[m[K’ was not declared in this scope
+[2.087s]  1300 |         if ([01;31m[Km_config[m[K) {
+[2.087s]       |             [01;31m[K^~~~~~~~[m[K
+[2.100s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In member function ‘[01m[Kstd::array<double, 3> TouchArmController::extractEulerAngles(const std::array<double, 16>&) const[m[K’:
+[2.100s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1590:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr12[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[2.100s]  1590 |         double [01;35m[Kr12[m[K = transform[4];
+[2.100s]       |                [01;35m[K^~~[m[K
+[2.101s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1591:16:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kr13[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[2.101s]  1591 |         double [01;35m[Kr13[m[K = transform[8];
+[2.101s]       |                [01;35m[K^~~[m[K
+[2.103s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K At global scope:
+[2.103s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1621:1:[m[K [01;31m[Kerror: [m[K‘[01m[KConfigLoader[m[K’ does not name a type
+[2.103s]  1621 | [01;31m[KConfigLoader[m[K* g_config = nullptr;  // 改为指针，支持动态配置文件
+[2.103s]       | [01;31m[K^~~~~~~~~~~~[m[K
+[2.108s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[2.108s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1664:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kg_config[m[K’ was not declared in this scope
+[2.108s]  1664 |     [01;31m[Kg_config[m[K = new ConfigLoader(configFile);
+[2.108s]       |     [01;31m[K^~~~~~~~[m[K
+[2.108s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1664:20:[m[K [01;31m[Kerror: [m[Kexpected type-specifier before ‘[01m[KConfigLoader[m[K’
+[2.108s]  1664 |     g_config = new [01;31m[KConfigLoader[m[K(configFile);
+[2.108s]       |                    [01;31m[K^~~~~~~~~~~~[m[K
+[2.109s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1764:12:[m[K [01;31m[Kerror: [m[Ktype ‘[01m[K<type error>[m[K’ argument given to ‘[01m[Kdelete[m[K’, expected pointer
+[2.109s]  1764 |     delete [01;31m[Kg_config[m[K;
+[2.110s]       |            [01;31m[K^~~~~~~~[m[K
+[2.113s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[Kvoid initializeDevices()[m[K’:
+[2.113s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1785:34:[m[K [01;31m[Kerror: [m[K‘[01m[Kg_config[m[K’ was not declared in this scope
+[2.113s]  1785 |     std::string device1Primary = [01;31m[Kg_config[m[K->getString("device_names.device1_primary", "PHANToM 1");
+[2.114s]       |                                  [01;31m[K^~~~~~~~[m[K
+[2.117s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[KHDCallbackCode device1Callback(void*)[m[K’:
+[2.117s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:1906:49:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kdata[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.117s]  1906 | HDCallbackCode HDCALLBACK device1Callback([01;35m[Kvoid *data[m[K)
+[2.117s]       |                                           [01;35m[K~~~~~~^~~~[m[K
+[2.120s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[KHDCallbackCode device2Callback(void*)[m[K’:
+[2.120s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2003:49:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kdata[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.120s]  2003 | HDCallbackCode HDCALLBACK device2Callback([01;35m[Kvoid *data[m[K)
+[2.120s]       |                                           [01;35m[K~~~~~~^~~~[m[K
+[2.122s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[Kvoid handleKeyboard()[m[K’:
+[2.122s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2246:40:[m[K [01;31m[Kerror: [m[K‘[01m[Kg_config[m[K’ was not declared in this scope
+[2.122s]  2246 |                 int currentFrameType = [01;31m[Kg_config[m[K->getInt("system.teach_frame_type", 1);
+[2.122s]       |                                        [01;31m[K^~~~~~~~[m[K
+[2.126s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2267:30:[m[K [01;31m[Kerror: [m[K‘[01m[Kg_config[m[K’ was not declared in this scope
+[2.126s]  2267 |                           << [01;31m[Kg_config[m[K->getInt("device1_mapping.touch_pos_to_arm_x", 2) << "→X, "
+[2.126s]       |                              [01;31m[K^~~~~~~~[m[K
+[2.131s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:[m[K In function ‘[01m[Kvoid printInstructions()[m[K’:
+[2.131s] [01m[K/home/ruio/Touch_Controller_Arm2-test3/Touch_Controller_Arm2.cpp:2358:21:[m[K [01;31m[Kerror: [m[K‘[01m[Kg_config[m[K’ was not declared in this scope
+[2.131s]  2358 |     int frameType = [01;31m[Kg_config[m[K->getInt("system.teach_frame_type", 1);
+[2.131s]       |                     [01;31m[K^~~~~~~~[m[K
+[2.667s] gmake[2]: *** [CMakeFiles/Touch_Controller_Arm2.dir/build.make:76：CMakeFiles/Touch_Controller_Arm2.dir/Touch_Controller_Arm2.cpp.o] 错误 1
+[2.667s] gmake[1]: *** [CMakeFiles/Makefile2:140：CMakeFiles/Touch_Controller_Arm2.dir/all] 错误 2
+[2.667s] gmake: *** [Makefile:166：all] 错误 2
+[2.669s] Invoked command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14

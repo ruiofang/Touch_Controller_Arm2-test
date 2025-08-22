@@ -1,0 +1,19 @@
+[35m[1mConsolidate compiler generated dependencies of target Touch_Controller_Arm2[0m
+[100%] Built target Touch_Controller_Arm2
+-- Install configuration: "Release"
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/lib/touch_controller_arm/Touch_Controller_Arm2
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/package_run_dependencies/touch_controller_arm
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/parent_prefix_path/touch_controller_arm
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.sh
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.sh
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.dsv
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.bash
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.sh
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.zsh
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.dsv
+-- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.dsv
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/packages/touch_controller_arm
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig.cmake
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig-version.cmake
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.xml

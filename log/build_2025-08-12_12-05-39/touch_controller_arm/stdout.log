@@ -1,0 +1,47 @@
+-- 使用系统OpenHaptics库: /usr/lib
+-- 找到Python: 3.10.12
+-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- 找到ROS2，启用ROS2支持
+-- ROS2支持已启用
+-- === 双Touch设备双机械臂控制系统 CMake 配置 ===
+-- 项目名称: touch_controller_arm
+-- 项目版本: 1.0.0
+-- 编译类型: Release
+-- C++标准: 11
+-- OpenHaptics: 使用系统库 (/usr/lib)
+-- HD库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHD.so.3.4.0
+-- HDU库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHDU.a
+-- ncurses库: /usr/lib/x86_64-linux-gnu/libncurses.so
+-- ===============================================
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm
+[35m[1mConsolidate compiler generated dependencies of target Touch_Controller_Arm2[0m
+[ 33%] [32mBuilding CXX object CMakeFiles/Touch_Controller_Arm2.dir/Touch_Controller_Arm2.cpp.o[0m
+[ 66%] [32m[1mLinking CXX executable Touch_Controller_Arm2[0m
+[100%] Built target Touch_Controller_Arm2
+-- Install configuration: "Release"
+-- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/lib/touch_controller_arm/Touch_Controller_Arm2
+-- Set runtime path of "/home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/lib/touch_controller_arm/Touch_Controller_Arm2" to ""
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/package_run_dependencies/touch_controller_arm
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/parent_prefix_path/touch_controller_arm
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.sh
+-- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.sh
+-- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.dsv
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.bash
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.sh
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.zsh
+-- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.dsv
+-- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.dsv
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/packages/touch_controller_arm
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig.cmake
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig-version.cmake
+-- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.xml

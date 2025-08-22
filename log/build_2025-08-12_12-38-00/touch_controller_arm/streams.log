@@ -1,0 +1,51 @@
+[0.006s] Invoking command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14
+[0.031s] -- 使用系统OpenHaptics库: /usr/lib
+[0.106s] -- 找到Python: 3.10.12
+[0.181s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.183s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.187s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.192s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.200s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.221s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.222s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.294s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.326s] -- 找到ROS2，启用ROS2支持
+[0.326s] -- ROS2支持已启用
+[0.396s] -- === 双Touch设备双机械臂控制系统 CMake 配置 ===
+[0.396s] -- 项目名称: touch_controller_arm
+[0.396s] -- 项目版本: 1.0.0
+[0.396s] -- 编译类型: Release
+[0.396s] -- C++标准: 11
+[0.396s] -- OpenHaptics: 使用系统库 (/usr/lib)
+[0.396s] -- HD库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHD.so.3.4.0
+[0.396s] -- HDU库: /home/ruio/Touch_Controller_Arm2-test3/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64/usr/lib/libHDU.a
+[0.396s] -- ncurses库: /usr/lib/x86_64-linux-gnu/libncurses.so
+[0.396s] -- ===============================================
+[0.396s] -- Configuring done
+[0.402s] -- Generating done
+[0.405s] -- Build files have been written to: /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm
+[0.426s] [35m[1mConsolidate compiler generated dependencies of target Touch_Controller_Arm2[0m
+[0.440s] [ 25%] [32mBuilding CXX object CMakeFiles/Touch_Controller_Arm2.dir/ConfigLoader.cpp.o[0m
+[1.360s] [ 50%] [32m[1mLinking CXX executable Touch_Controller_Arm2[0m
+[1.467s] [100%] Built target Touch_Controller_Arm2
+[1.476s] Invoked command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14
+[1.485s] Invoking command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm
+[1.491s] -- Install configuration: "Release"
+[1.491s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/lib/touch_controller_arm/Touch_Controller_Arm2
+[1.492s] -- Set runtime path of "/home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/lib/touch_controller_arm/Touch_Controller_Arm2" to ""
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/package_run_dependencies/touch_controller_arm
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/parent_prefix_path/touch_controller_arm
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.sh
+[1.492s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/ament_prefix_path.dsv
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.sh
+[1.492s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/environment/path.dsv
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.bash
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.sh
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.zsh
+[1.492s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/local_setup.dsv
+[1.492s] -- Installing: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.dsv
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/ament_index/resource_index/packages/touch_controller_arm
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig.cmake
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/cmake/touch_controller_armConfig-version.cmake
+[1.492s] -- Up-to-date: /home/ruio/Touch_Controller_Arm2-test3/install/touch_controller_arm/share/touch_controller_arm/package.xml
+[1.494s] Invoked command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm

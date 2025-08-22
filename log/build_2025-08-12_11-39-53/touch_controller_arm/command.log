@@ -1,0 +1,4 @@
+Invoking command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14
+Invoked command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm -- -j14 -l14
+Invoking command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm
+Invoked command in '/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm

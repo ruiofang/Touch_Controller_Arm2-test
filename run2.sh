@@ -3,7 +3,11 @@
 # 双触觉设备双机械臂控制系统启动脚本
 # 仅过滤 hEvent is NULL 调试信息，保留其他所有日志
 
+# 设置OpenHaptics环境变量
+export GTDD_HOME=/usr
+source /opt/ros/humble/setup.bash
 echo "=== 双触觉设备双机械臂控制系统 ==="
+echo "环境变量: GTDD_HOME=$GTDD_HOME"
 echo "正在启动程序（过滤hEvent调试信息）..."
 echo ""
 

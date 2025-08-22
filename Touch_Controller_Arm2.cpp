@@ -130,7 +130,11 @@ public:
     
     void openHand() {
         if (m_useRos2) {
+#ifdef USE_ROS2
             publishRos2Command(m_releaseAction);
+#else
+            std::cerr << "❌ ROS2支持未编译" << std::endl;
+#endif
         } else {
             openHandPython();
         }
@@ -140,7 +144,11 @@ public:
     
     void closeHand() {
         if (m_useRos2) {
+#ifdef USE_ROS2
             publishRos2Command(m_graspAction);
+#else
+            std::cerr << "❌ ROS2支持未编译" << std::endl;
+#endif
         } else {
             closeHandPython();
         }
@@ -215,7 +223,7 @@ private:
             
             // 添加linker_hand_python_sdk路径到Python路径
             PyRun_SimpleString("import sys");
-            std::string sdkPath = "sys.path.append('/home/ruio/Touch_Controller_Arm2-test/linker_hand_python_sdk')";
+            std::string sdkPath = "sys.path.append('linker_hand_python_sdk')";
             PyRun_SimpleString(sdkPath.c_str());
             
             // 导入LinkerHand模块
@@ -1652,8 +1660,8 @@ int main(int argc, char* argv[])
         }
     }
     
-    // 创建配置加载器
-    g_config = new ConfigLoader(configFile);
+    // 创建配置加载器（启用注释功能）
+    g_config = new ConfigLoader(configFile, true);
 
 #ifdef USE_ROS2
     // 如果编译了ROS2支持，初始化ROS2
@@ -1664,6 +1672,14 @@ int main(int argc, char* argv[])
     // 加载配置文件
     std::cout << "=== 加载配置文件 ===" << std::endl;
     g_config->loadConfig();
+    
+    // 检查是否需要保存配置文件（添加注释）
+    bool autoSaveConfig = g_config->getBool("ui.auto_save_config", true);
+    if (autoSaveConfig) {
+        std::cout << "📝 更新配置文件（添加注释说明）..." << std::endl;
+        g_config->saveConfigWithComments();
+        std::cout << "✅ 配置文件已更新" << std::endl;
+    }
     
     // 从配置文件获取机械臂连接参数
     std::string robot1IP = g_config->getString("robot1.ip", "192.168.10.18");

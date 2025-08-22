@@ -17,7 +17,7 @@ import time
 sys.path.append(os.path.join(os.path.dirname(__file__), 'linker_hand_python_sdk'))
 
 try:
-    from LinkerHand.linker_hand_api import LinkerHandAPI
+    from LinkerHand.linker_hand_api import LinkerHandApi
     LINKER_HAND_AVAILABLE = True
 except ImportError as e:
     print(f"警告: 无法导入LinkerHand SDK: {e}")
@@ -47,7 +47,6 @@ class DexterousHandController(Node):
         
         # 初始化灵巧手
         self.hand_api = None
-        self.hand_instance = None
         self.initialized = False
         
         if LINKER_HAND_AVAILABLE:
@@ -68,20 +67,51 @@ class DexterousHandController(Node):
         self.get_logger().info("   1. 简单字符串: 'ZQ', 'ZK'")
         self.get_logger().info("   2. JSON格式: {\"hand_type\": \"left\", \"action\": \"ZQ\", ...}")
     
+    def get_action_params(self, action_code):
+        """从配置文件获取动作参数"""
+        try:
+            if not hasattr(self, 'yaml_loader'):
+                from LinkerHand.utils.load_write_yaml import LoadWriteYaml
+                self.yaml_loader = LoadWriteYaml()
+            
+            # 定义动作映射
+            action_mapping = {
+                'ZQ': 'zq',      # 握拳指令映射到zq动作
+                'ZK': '张开'     # 张开指令映射到张开动作
+            }
+            
+            # 获取实际的动作名称
+            action_name = action_mapping.get(action_code, action_code)
+            
+            # 加载动作配置
+            actions = self.yaml_loader.load_action_yaml(
+                hand_type=self.hand_type,
+                hand_joint=self.hand_joint
+            )
+            
+            # 查找对应的动作
+            for action in actions:
+                if action.get('ACTION_NAME') == action_name:
+                    return action.get('POSITION', [])
+            
+            self.get_logger().warning(f"⚠️  未找到动作 {action_name} 的配置")
+            return None
+            
+        except Exception as e:
+            self.get_logger().error(f"❌ 获取动作参数异常: {e}")
+            return None
+    
     def initialize_hand(self):
         """初始化灵巧手"""
         try:
             # 创建LinkerHand API实例
-            self.hand_api = LinkerHandAPI()
-            
-            # 初始化手部
-            self.hand_instance = self.hand_api.initialize_hand(
+            self.hand_api = LinkerHandApi(
                 hand_type=self.hand_type,
                 hand_joint=self.hand_joint,
-                can_interface=self.can_interface
+                can=self.can_interface
             )
             
-            if self.hand_instance:
+            if self.hand_api:
                 self.initialized = True
                 self.get_logger().info(f"✅ 灵巧手初始化成功: {self.hand_type} {self.hand_joint}")
                 
@@ -93,6 +123,7 @@ class DexterousHandController(Node):
                 
         except Exception as e:
             self.get_logger().error(f"❌ 灵巧手初始化异常: {e}")
+            self.initialized = False
     
     def command_callback(self, msg):
         """处理接收到的控制命令"""
@@ -166,17 +197,40 @@ class DexterousHandController(Node):
     def execute_action(self, action):
         """执行灵巧手动作"""
         try:
-            if self.initialized and self.hand_instance:
-                # 使用真实的灵巧手
-                success = self.hand_api.execute_action(self.hand_instance, action)
-                if success:
-                    self.get_logger().info(f"✅ 执行动作成功: {action}")
-                    if action == 'ZQ':
-                        self.get_logger().info("👊 灵巧手握拳")
-                    elif action == 'ZK':
-                        self.get_logger().info("👋 灵巧手张开")
+            if self.initialized and self.hand_api:
+                # 从配置文件获取动作参数
+                pose = self.get_action_params(action)
+                
+                if pose is None or len(pose) == 0:
+                    self.get_logger().error(f"❌ 无法获取动作 {action} 的参数")
+                    return
+                
+                # 设置默认速度
+                if self.hand_joint == "L7":
+                    speed = [120, 120, 120, 150, 150, 150, 150]
+                elif self.hand_joint == "L10":
+                    speed = [120, 250, 250, 250, 250, 250, 250, 250, 250, 250]
+                elif self.hand_joint == "L20":
+                    speed = [120] * 20  # L20有20个关节
+                elif self.hand_joint == "L25":
+                    speed = [120] * 25  # L25有25个关节
                 else:
-                    self.get_logger().error(f"❌ 执行动作失败: {action}")
+                    speed = [120] + [250] * (len(pose) - 1)
+                
+                # 执行动作
+                self.hand_api.set_speed(speed=speed)
+                self.hand_api.finger_move(pose=pose)
+                
+                # 记录执行信息
+                if action == 'ZQ':
+                    self.get_logger().info("✅ 执行动作成功: 握拳 👊")
+                elif action == 'ZK':
+                    self.get_logger().info("✅ 执行动作成功: 张开 👋")
+                else:
+                    self.get_logger().info(f"✅ 执行动作成功: {action}")
+                
+                self.get_logger().info(f"📊 动作参数: {pose}")
+                    
             else:
                 # 模拟模式
                 self.get_logger().info(f"🎭 模拟执行动作: {action}")
@@ -196,7 +250,9 @@ class DexterousHandController(Node):
             try:
                 # 在退出前将手张开
                 self.execute_action("ZK")
-                self.hand_api.cleanup()
+                # 如果有close_can方法，调用它
+                if hasattr(self.hand_api, 'close_can'):
+                    self.hand_api.close_can()
                 self.get_logger().info("🧹 灵巧手资源清理完成")
             except Exception as e:
                 self.get_logger().error(f"❌ 资源清理异常: {e}")
@@ -206,6 +262,7 @@ class DexterousHandController(Node):
 def main(args=None):
     rclpy.init(args=args)
     
+    node = None
     try:
         node = DexterousHandController()
         rclpy.spin(node)
@@ -215,10 +272,17 @@ def main(args=None):
         print(f"❌ 节点运行异常: {e}")
     finally:
         try:
-            node.destroy_node()
-        except:
-            pass
-        rclpy.shutdown()
+            if node is not None:
+                node.destroy_node()
+        except Exception as e:
+            print(f"⚠️  节点销毁异常: {e}")
+        
+        try:
+            if rclpy.ok():
+                rclpy.shutdown()
+        except Exception as e:
+            print(f"⚠️  ROS2关闭异常: {e}")
+        
         print("👋 ROS2灵巧手控制节点已退出")
 
 if __name__ == '__main__':

@@ -269,6 +269,30 @@ check-config/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/check-config.dir/build.make CMakeFiles/check-config.dir/build
 .PHONY : check-config/fast
 
+ConfigLoader.o: ConfigLoader.cpp.o
+.PHONY : ConfigLoader.o
+
+# target to build an object file
+ConfigLoader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Touch_Controller_Arm2.dir/build.make CMakeFiles/Touch_Controller_Arm2.dir/ConfigLoader.cpp.o
+.PHONY : ConfigLoader.cpp.o
+
+ConfigLoader.i: ConfigLoader.cpp.i
+.PHONY : ConfigLoader.i
+
+# target to preprocess a source file
+ConfigLoader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Touch_Controller_Arm2.dir/build.make CMakeFiles/Touch_Controller_Arm2.dir/ConfigLoader.cpp.i
+.PHONY : ConfigLoader.cpp.i
+
+ConfigLoader.s: ConfigLoader.cpp.s
+.PHONY : ConfigLoader.s
+
+# target to generate assembly for a file
+ConfigLoader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Touch_Controller_Arm2.dir/build.make CMakeFiles/Touch_Controller_Arm2.dir/ConfigLoader.cpp.s
+.PHONY : ConfigLoader.cpp.s
+
 Touch_Controller_Arm2.o: Touch_Controller_Arm2.cpp.o
 .PHONY : Touch_Controller_Arm2.o
 
@@ -338,6 +362,9 @@ help:
 	@echo "... touch_controller_arm_uninstall"
 	@echo "... uninstall"
 	@echo "... Touch_Controller_Arm2"
+	@echo "... ConfigLoader.o"
+	@echo "... ConfigLoader.i"
+	@echo "... ConfigLoader.s"
 	@echo "... Touch_Controller_Arm2.o"
 	@echo "... Touch_Controller_Arm2.i"
 	@echo "... Touch_Controller_Arm2.s"

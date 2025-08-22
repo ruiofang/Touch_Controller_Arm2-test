@@ -20,28 +20,56 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-# OpenHaptics路径设置
-set(OPENHAPTICS_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64")
-set(OPENHAPTICS_INCLUDE_DIR "${OPENHAPTICS_ROOT_DIR}/usr/include")
-set(OPENHAPTICS_LIBRARY_DIR "${OPENHAPTICS_ROOT_DIR}/usr/lib")
+# OpenHaptics路径设置（优先使用系统路径）
+set(OPENHAPTICS_SYSTEM_INCLUDE_DIR "/usr/include")
+set(OPENHAPTICS_SYSTEM_LIBRARY_DIR "/usr/lib")
+set(OPENHAPTICS_LOCAL_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/OpenHaptics/openhaptics_3.4-0-developer-edition-amd64")
+set(OPENHAPTICS_LOCAL_INCLUDE_DIR "${OPENHAPTICS_LOCAL_ROOT_DIR}/usr/include")
+set(OPENHAPTICS_LOCAL_LIBRARY_DIR "${OPENHAPTICS_LOCAL_ROOT_DIR}/usr/lib")
 
-# 检查OpenHaptics是否存在
-if(NOT EXISTS "${OPENHAPTICS_ROOT_DIR}")
-    message(FATAL_ERROR "OpenHaptics未找到！请确保路径正确: ${OPENHAPTICS_ROOT_DIR}")
+# 检查系统OpenHaptics是否存在
+if(EXISTS "${OPENHAPTICS_SYSTEM_LIBRARY_DIR}/libHD.so.3.4.0")
+    message(STATUS "使用系统OpenHaptics库: ${OPENHAPTICS_SYSTEM_LIBRARY_DIR}")
+    set(OPENHAPTICS_INCLUDE_DIR "${OPENHAPTICS_SYSTEM_INCLUDE_DIR}")
+    set(OPENHAPTICS_LIBRARY_DIR "${OPENHAPTICS_SYSTEM_LIBRARY_DIR}")
+    set(USE_SYSTEM_OPENHAPTICS TRUE)
+elseif(EXISTS "${OPENHAPTICS_LOCAL_ROOT_DIR}")
+    message(STATUS "使用本地OpenHaptics库: ${OPENHAPTICS_LOCAL_LIBRARY_DIR}")
+    set(OPENHAPTICS_INCLUDE_DIR "${OPENHAPTICS_LOCAL_INCLUDE_DIR}")
+    set(OPENHAPTICS_LIBRARY_DIR "${OPENHAPTICS_LOCAL_LIBRARY_DIR}")
+    set(USE_SYSTEM_OPENHAPTICS FALSE)
+else()
+    message(FATAL_ERROR "OpenHaptics未找到！请运行 ./setup_touch_environment.sh 安装到系统，或确保本地路径正确: ${OPENHAPTICS_LOCAL_ROOT_DIR}")
 endif()
 
 # 查找OpenHaptics库
-find_library(HD_LIBRARY 
-    NAMES HD libHD libHD.so.3.4.0
-    PATHS ${OPENHAPTICS_LIBRARY_DIR}
-    NO_DEFAULT_PATH
-)
-
-find_library(HDU_LIBRARY 
-    NAMES HDU libHDU libHDU.a
-    PATHS ${OPENHAPTICS_LIBRARY_DIR}
-    NO_DEFAULT_PATH
-)
+if(USE_SYSTEM_OPENHAPTICS)
+    # 使用系统路径查找库
+    find_library(HD_LIBRARY 
+        NAMES HD
+        PATHS ${OPENHAPTICS_LIBRARY_DIR}
+        NO_DEFAULT_PATH
+    )
+    
+    find_library(HDU_LIBRARY 
+        NAMES HDU
+        PATHS ${OPENHAPTICS_LIBRARY_DIR}
+        NO_DEFAULT_PATH
+    )
+else()
+    # 使用本地路径查找库
+    find_library(HD_LIBRARY 
+        NAMES HD libHD libHD.so.3.4.0
+        PATHS ${OPENHAPTICS_LIBRARY_DIR}
+        NO_DEFAULT_PATH
+    )
+    
+    find_library(HDU_LIBRARY 
+        NAMES HDU libHDU libHDU.a
+        PATHS ${OPENHAPTICS_LIBRARY_DIR}
+        NO_DEFAULT_PATH
+    )
+endif()
 
 if(NOT HD_LIBRARY)
     message(FATAL_ERROR "HD库未找到！路径: ${OPENHAPTICS_LIBRARY_DIR}")
@@ -95,6 +123,7 @@ endif()
 set(SOURCES
     Touch_Controller_Arm2.cpp
     conio.c
+    ConfigLoader.cpp
 )
 
 # 创建可执行文件
@@ -187,7 +216,8 @@ add_custom_target(clean-all
 # 检查配置
 add_custom_target(check-config
     COMMAND ${CMAKE_COMMAND} -E echo "检查项目配置:"
-    COMMAND ${CMAKE_COMMAND} -E echo "  OpenHaptics路径: ${OPENHAPTICS_ROOT_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E echo "  OpenHaptics类型: ${CMAKE_CURRENT_SOURCE_DIR}使用$<IF:$<BOOL:${USE_SYSTEM_OPENHAPTICS}>,系统库,本地库>"
+    COMMAND ${CMAKE_COMMAND} -E echo "  OpenHaptics路径: ${OPENHAPTICS_LIBRARY_DIR}"
     COMMAND ${CMAKE_COMMAND} -E echo "  HD库: ${HD_LIBRARY}"
     COMMAND ${CMAKE_COMMAND} -E echo "  HDU库: ${HDU_LIBRARY}"
     COMMAND ${CMAKE_COMMAND} -E echo "  ncurses库: ${NCURSES_LIBRARY}"
@@ -202,7 +232,11 @@ message(STATUS "项目名称: ${PROJECT_NAME}")
 message(STATUS "项目版本: ${PROJECT_VERSION}")
 message(STATUS "编译类型: ${CMAKE_BUILD_TYPE}")
 message(STATUS "C++标准: ${CMAKE_CXX_STANDARD}")
-message(STATUS "OpenHaptics路径: ${OPENHAPTICS_ROOT_DIR}")
+if(USE_SYSTEM_OPENHAPTICS)
+    message(STATUS "OpenHaptics: 使用系统库 (${OPENHAPTICS_LIBRARY_DIR})")
+else()
+    message(STATUS "OpenHaptics: 使用本地库 (${OPENHAPTICS_LIBRARY_DIR})")
+endif()
 message(STATUS "HD库: ${HD_LIBRARY}")
 message(STATUS "HDU库: ${HDU_LIBRARY}")
 message(STATUS "ncurses库: ${NCURSES_LIBRARY}")

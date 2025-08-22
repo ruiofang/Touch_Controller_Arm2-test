@@ -138,12 +138,12 @@ CMakeFiles/touch_controller_arm_uninstall.dir/clean:
 CMakeFiles/Touch_Controller_Arm2.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Touch_Controller_Arm2.dir/build.make CMakeFiles/Touch_Controller_Arm2.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Touch_Controller_Arm2.dir/build.make CMakeFiles/Touch_Controller_Arm2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=1,2,3 "Built target Touch_Controller_Arm2"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=1,2,3,4 "Built target Touch_Controller_Arm2"
 .PHONY : CMakeFiles/Touch_Controller_Arm2.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Touch_Controller_Arm2.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Touch_Controller_Arm2.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles 0
 .PHONY : CMakeFiles/Touch_Controller_Arm2.dir/rule
@@ -164,12 +164,12 @@ CMakeFiles/Touch_Controller_Arm2.dir/clean:
 CMakeFiles/run.dir/all: CMakeFiles/Touch_Controller_Arm2.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=6 "Built target run"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=7 "Built target run"
 .PHONY : CMakeFiles/run.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/run.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/run.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles 0
 .PHONY : CMakeFiles/run.dir/rule
@@ -190,7 +190,7 @@ CMakeFiles/run.dir/clean:
 CMakeFiles/clean-all.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean-all.dir/build.make CMakeFiles/clean-all.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clean-all.dir/build.make CMakeFiles/clean-all.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=5 "Built target clean-all"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=6 "Built target clean-all"
 .PHONY : CMakeFiles/clean-all.dir/all
 
 # Build rule for subdir invocation for target.
@@ -216,7 +216,7 @@ CMakeFiles/clean-all.dir/clean:
 CMakeFiles/check-config.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/check-config.dir/build.make CMakeFiles/check-config.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/check-config.dir/build.make CMakeFiles/check-config.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=4 "Built target check-config"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ruio/Touch_Controller_Arm2-test3/build/touch_controller_arm/CMakeFiles --progress-num=5 "Built target check-config"
 .PHONY : CMakeFiles/check-config.dir/all
 
 # Build rule for subdir invocation for target.
